@@ -26,4 +26,7 @@ public class OrderResponseDTO extends RepresentationModel<OrderResponseDTO> impl
 
     @NotNull(message = "the products can't be null")
     private List<ProductResponseDTO> products;
+
+    @NotNull
+    private String status;
 }

@@ -2,6 +2,7 @@ package com.compass.ms_order.services;
 
 import com.compass.ms_order.entities.Order;
 import com.compass.ms_order.entities.Product;
+import com.compass.ms_order.entities.Status;
 import com.compass.ms_order.exeptions.EntityNotFoundException;
 import com.compass.ms_order.repositories.OrderFunctionsRepository;
 import com.compass.ms_order.repositories.OrderRepository;
@@ -43,6 +44,7 @@ public class OrderServices implements OrderFunctionsRepository {
 
             create.setClientEmail(create.getClientEmail().toLowerCase());
             create.setProtocol(UUID.randomUUID().toString());
+            create.setStatus(Status.PENDENTE);
             create = repo.save(create);
             log.info("Creating a new Order: " + create);
             return OrderMapper.toDto(create);
@@ -80,9 +82,20 @@ public class OrderServices implements OrderFunctionsRepository {
 
         currentOrder.setProducts(updatedProducts);
         currentOrder.setClientEmail(currentOrder.getClientEmail().toLowerCase());
+        currentOrder.setStatus(update.getStatus());
+
         update = repo.save(currentOrder);
         log.info("Updating a Order By id: " + update);
         return OrderMapper.toDto(update);
+    }
+
+    public List<OrderResponseDTO> findAllOrders() {
+        List<Order> orders = repo.findAll();
+        List<OrderResponseDTO> orderResponseDTOs = new ArrayList<>();
+        for (Order order : orders) {
+            orderResponseDTOs.add(OrderMapper.toDto(order));
+        }
+        return orderResponseDTOs;
     }
 
     public List<OrderResponseDTO> findAllOrdersByEmail(String email) {

@@ -27,7 +27,7 @@ public class ClientService implements ClientFunctionsRepository {
             throw new DataUniqueViolationException("There is already a email registered");
         }
         Client client = ClientMapper.toClient(create);
-        client.setEmail(client.getEmail().toUpperCase());
+        client.setEmail(client.getEmail().toLowerCase());
         log.info("creating a client: " + client);
         client = repo.save(client);
         return ClientMapper.toDto(client);
