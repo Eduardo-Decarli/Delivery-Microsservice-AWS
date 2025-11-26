@@ -22,7 +22,7 @@ public class ClientService implements ClientFunctionsRepository {
     private final ClientRepository repo;
 
     public ClientResponseDTO createClient(ClientCreateDTO create) {
-        if(repo.findByEmail(create.getEmail().toUpperCase()) != null) {
+        if(repo.findByEmail(create.getEmail()) != null) {
             log.error("the client already exist in system, error DataUniqueViolationException");
             throw new DataUniqueViolationException("There is already a email registered");
         }
@@ -53,7 +53,7 @@ public class ClientService implements ClientFunctionsRepository {
 
     public Client findClientByEmail(String email) {
 
-        Client client = repo.findByEmail(email.toUpperCase());
+        Client client = repo.findByEmail(email);
         if(client == null) {
             log.error("error: not found client by email: " + email);
             throw new EntityNotFoundException("error: not found client by email " + email);
@@ -64,12 +64,12 @@ public class ClientService implements ClientFunctionsRepository {
 
     public ClientResponseDTO updateClientById(ClientCreateDTO update, Long id) {
         Client correntClient = findClientById(id);
-        if(repo.findByEmail(update.getEmail().toUpperCase()) != null && !(update.getEmail().equalsIgnoreCase(correntClient.getEmail()))) {
+        if(repo.findByEmail(update.getEmail()) != null && !(update.getEmail().equalsIgnoreCase(correntClient.getEmail()))) {
             log.error("the client already exist in system, error DataUniqueViolationException");
             throw new DataUniqueViolationException("There is already a client registered with that email");
         }
         correntClient.setName(update.getName());
-        correntClient.setEmail(update.getEmail().toUpperCase());
+        correntClient.setEmail(update.getEmail());
 
         log.info("updating a client by id: " + correntClient);
         Client client = repo.save(correntClient);
@@ -78,12 +78,12 @@ public class ClientService implements ClientFunctionsRepository {
 
     public ClientResponseDTO updateClientByEmail(ClientCreateDTO update, String email) {
         Client correntClient = findClientByEmail(email);
-        if(repo.findByEmail(update.getEmail().toUpperCase()) != null && !(update.getEmail().equalsIgnoreCase(correntClient.getEmail()))) {
+        if(repo.findByEmail(update.getEmail()) != null && !(update.getEmail().equalsIgnoreCase(correntClient.getEmail()))) {
             log.error("the client already exist in system, error DataUniqueViolationException");
             throw new DataUniqueViolationException("There is already a client registered with that email");
         }
         correntClient.setName(update.getName());
-        correntClient.setEmail(update.getEmail().toUpperCase());
+        correntClient.setEmail(update.getEmail());
 
         log.info("updating a client by email: " + correntClient);
         Client client = repo.save(correntClient);
