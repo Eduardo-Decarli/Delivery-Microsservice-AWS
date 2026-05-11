@@ -1,8 +1,8 @@
-# SP_SpringBoot_AWS_Desafio_03_pedido-estoque-client
+# Delivery-Microsservice-AWS
 
 In this project, a management system for orders was developed, featuring three (3) microservices built using **Spring** environments and deployed on **AWS**. The system handles the **creation**, **management**, and **manipulation** of data related to **inventory**, **customers**, and **orders**. It includes **GitHub Actions** for build and **testing**, **Swagger** for API documentation, **OpenFeign** for communication between microservices, **dockerizations** of the services, and deployment on **AWS**.
 
-## Estrutura do Projeto
+## Project Structure
 
 |- ./ms-client <br>
 |- ./ms-stock <br>
@@ -13,7 +13,7 @@ In this project, a management system for orders was developed, featuring three (
 |- Postman_rotes <br>
 |- README.md
 
-## Rotas
+## Routes
 
 These are the routes of the project:
 
@@ -70,7 +70,7 @@ These are the routes of the project:
 - ms-client: 99% line coverage
 - ms-order: 83% line coverage
 
-# Tecnologias Utilizadas
+# Used Tecnologies
 
 - InteliJ
 - VSCode
